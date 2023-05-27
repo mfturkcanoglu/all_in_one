@@ -1,5 +1,10 @@
-
-[*.{cs,vb}]
+[
+  "*.",
+  {
+    "cs",
+    "vb"
+  }
+]
 #### Naming styles ####
 
 # Naming rules
