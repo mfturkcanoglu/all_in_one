@@ -1,7 +1,0 @@
-C:\Users\furkan-turkcanoglu\source\repos\AllInOne\API\obj\Debug\net7.0\API.csproj.AssemblyReference.cache
-C:\Users\furkan-turkcanoglu\source\repos\AllInOne\API\obj\Debug\net7.0\API.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\furkan-turkcanoglu\source\repos\AllInOne\API\obj\Debug\net7.0\API.AssemblyInfoInputs.cache
-C:\Users\furkan-turkcanoglu\source\repos\AllInOne\API\obj\Debug\net7.0\API.AssemblyInfo.cs
-C:\Users\furkan-turkcanoglu\source\repos\AllInOne\API\obj\Debug\net7.0\API.csproj.CoreCompileInputs.cache
-C:\Users\furkan-turkcanoglu\source\repos\AllInOne\API\obj\Debug\net7.0\API.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\furkan-turkcanoglu\source\repos\AllInOne\API\obj\Debug\net7.0\API.MvcApplicationPartsAssemblyInfo.cache
