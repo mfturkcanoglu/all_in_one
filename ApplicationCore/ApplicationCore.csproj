@@ -6,4 +6,16 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Dto\" />
+    <Folder Include="Extension\" />
+    <Folder Include="Service\" />
+    <Folder Include="Profiles\" />
+    <Folder Include="OptionsSetup\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

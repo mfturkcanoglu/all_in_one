@@ -30,6 +30,7 @@ public static class Installer
             app.UseSwaggerUI();
         }
 
+        app.UseAuthentication();
         app.UseAuthorization();
     }
 }

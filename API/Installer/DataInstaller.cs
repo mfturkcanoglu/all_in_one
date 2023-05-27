@@ -14,8 +14,23 @@ public class DataInstaller : IInstaller
             options.UseNpgsql(configuration.GetConnectionString("Postgres"));
         });
 
-        services.AddIdentity<User, UserRole>()
-            .AddEntityFrameworkStores<UserDbContext>()
-            .AddDefaultTokenProviders();
+        services.AddIdentity<User, UserRole>(options =>
+        {
+            options.User.RequireUniqueEmail = true;
+
+            // Password Validations
+            options.Password.RequireDigit = true;
+            options.Password.RequiredLength = 8;
+            options.Password.RequiredUniqueChars = 1;
+            options.Password.RequireLowercase = true;
+            options.Password.RequireUppercase = true;
+            options.Password.RequireNonAlphanumeric = true;
+
+            // Lockout Validations
+            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+            options.Lockout.MaxFailedAccessAttempts = 5;
+        })
+        .AddEntityFrameworkStores<UserDbContext>()
+        .AddDefaultTokenProviders();
     }
 }
