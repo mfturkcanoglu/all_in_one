@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using API.Util;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -11,8 +12,10 @@ public class ApiInstaller : IInstaller
     {
         services.AddControllers()
             .AddNewtonsoftJson();
+        services.AddLogging();
+        services.AddSingleton<ILogger, Logger<Program>>();
         services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
+        services.AddSwaggerServices();
         services.AddDistributedMemoryCache();
 
         services.AddAuthentication(options =>

@@ -24,10 +24,10 @@ public class TokenService : ITokenService
         var token = new JwtSecurityToken(
             issuer: tokenOption.Issuer,
             audience: tokenOption.Audience,
-            expires: DateTime.Now.AddHours(tokenOption.TokenExpiration),
+            expires: DateTime.Now.AddDays(tokenOption.TokenExpiration),
             claims: authClaims,
             signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-            );
+        );
 
         return token;
     }

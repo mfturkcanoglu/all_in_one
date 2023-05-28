@@ -4,6 +4,7 @@ using ApplicationCore.Service.Abstract;
 using AutoMapper;
 using Infrastructure.Model;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
@@ -16,18 +17,21 @@ public class UserService : IUserService
     private readonly RoleManager<UserRole> roleManager;
     private readonly IMapper mapper;
     private readonly ITokenService tokenService;
+    private readonly ILogger logger;
 
     public UserService(UserManager<User> userManager,
         SignInManager<User> signInManager,
         RoleManager<UserRole> roleManager,
         IMapper mapper,
-        ITokenService tokenService)
+        ITokenService tokenService,
+        ILogger logger)
     {
         this.userManager = userManager;
         this.signInManager = signInManager;
         this.roleManager = roleManager;
         this.mapper = mapper;
         this.tokenService = tokenService;
+        this.logger = logger;
     }
 
     public async Task<AuthResponseDto> LoginUser(LoginRequestDto loginRequestDto)
@@ -80,11 +84,19 @@ public class UserService : IUserService
         {
             Email = signUpRequestDto.Email,
             SecurityStamp = Guid.NewGuid().ToString(),
-            UserName = signUpRequestDto.CountryId
+            UserName = signUpRequestDto.CountryId,
+            Active = true,
+            FullName = signUpRequestDto.FullName,
+            CountryId = signUpRequestDto.CountryId
         };
         var result = await userManager.CreateAsync(user, signUpRequestDto.Password);
         if (!result.Succeeded)
-            throw new Exception("User creation failed! Please check user details and try again.");
+        {
+            var errors = string.Join(",", result.Errors.Select(x => x.Description));
+            logger.LogError(errors);
+            throw new Exception($"User creation failed! Please check user details and try again. {errors}");
+        }
+
 
         var token = await GetTokenForUser(user);
         return new AuthResponseDto

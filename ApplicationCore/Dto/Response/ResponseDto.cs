@@ -18,7 +18,7 @@ public class ResponseDto<T>
     [JsonProperty(propertyName: "status")]
     public int Status { get; set; } = ((int)HttpStatusCode.OK);
 
-    [JsonProperty(propertyName: "status")]
+    [JsonProperty(propertyName: "success")]
     public bool Success { get; set; } = true;
 
     [JsonProperty(propertyName: "message", NullValueHandling = NullValueHandling.Ignore)]

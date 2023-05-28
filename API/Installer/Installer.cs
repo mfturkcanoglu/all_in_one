@@ -1,4 +1,6 @@
-﻿namespace API.Installer;
+﻿using API.Middleware;
+
+namespace API.Installer;
 
 public static class Installer
 {
@@ -18,6 +20,8 @@ public static class Installer
 
     public static void UseMiddlewares(this WebApplication app)
     {
+        app.UseMiddleware<ExceptionHandlingMiddleware>();
+
         app.UseCors(x => x
             .AllowAnyMethod()
             .AllowAnyHeader()
@@ -29,5 +33,7 @@ public static class Installer
 
         app.UseAuthentication();
         app.UseAuthorization();
+
+        app.MapControllers();
     }
 }
