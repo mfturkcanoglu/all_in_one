@@ -24,11 +24,8 @@ public static class Installer
             .SetIsOriginAllowed(origin => true)
             .AllowCredentials());
 
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseSwagger();
-            app.UseSwaggerUI();
-        }
+        app.UseSwagger();
+        app.UseSwaggerUI();
 
         app.UseAuthentication();
         app.UseAuthorization();

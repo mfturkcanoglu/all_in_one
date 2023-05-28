@@ -17,18 +17,8 @@ public class DataInstaller : IInstaller
         services.AddIdentity<User, UserRole>(options =>
         {
             options.User.RequireUniqueEmail = true;
-
-            // Password Validations
-            options.Password.RequireDigit = true;
-            options.Password.RequiredLength = 8;
-            options.Password.RequiredUniqueChars = 1;
-            options.Password.RequireLowercase = true;
-            options.Password.RequireUppercase = true;
-            options.Password.RequireNonAlphanumeric = true;
-
-            // Lockout Validations
-            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
-            options.Lockout.MaxFailedAccessAttempts = 5;
+            options.Password.RequireNonAlphanumeric = false;
+            options.Password.RequiredLength = 6;
         })
         .AddEntityFrameworkStores<UserDbContext>()
         .AddDefaultTokenProviders();
