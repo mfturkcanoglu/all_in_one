@@ -14,6 +14,11 @@ public class DataInstaller : IInstaller
             options.UseNpgsql(configuration.GetConnectionString("Postgres"));
         });
 
+        services.AddDbContext<AppDbContext>(options =>
+        {
+            options.UseNpgsql(configuration.GetConnectionString("Postgres"));
+        });
+
         services.AddIdentity<User, UserRole>(options =>
         {
             options.User.RequireUniqueEmail = true;
