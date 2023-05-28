@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "DdclZ8nDy+AiXRW8h913ahKbYFhOh8PrApLvWpR29Wd9FDOHf6JehR6GF+87Jd8AnAZAOGbPbJ40WEFBC46xAg==",
+  "dgSpecHash": "UbtZDMBS9hH4q4J+ndjYAx+kjkSRgFC3vuyqM1Hc0stIdNM3n9ripPki6udJiVbVi49KRyeudbfozeltrlZ3vA==",
   "success": true,
   "projectFilePath": "C:\\Users\\furkan-turkcanoglu\\source\\repos\\AllInOne\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -27,6 +27,7 @@
     "C:\\Users\\furkan-turkcanoglu\\.nuget\\packages\\microsoft.extensions.options\\7.0.1\\microsoft.extensions.options.7.0.1.nupkg.sha512",
     "C:\\Users\\furkan-turkcanoglu\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
     "C:\\Users\\furkan-turkcanoglu\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\furkan-turkcanoglu\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\furkan-turkcanoglu\\.nuget\\packages\\npgsql\\7.0.4\\npgsql.7.0.4.nupkg.sha512",
     "C:\\Users\\furkan-turkcanoglu\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\7.0.4\\npgsql.entityframeworkcore.postgresql.7.0.4.nupkg.sha512",
     "C:\\Users\\furkan-turkcanoglu\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",
