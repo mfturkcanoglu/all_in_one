@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Infrastructure.Model;
 
+[Table(name: "semester")]
 public class Semester : BaseModel
 {
     [Required]

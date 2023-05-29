@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Infrastructure.Enum;
+using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Infrastructure.Model;
 
+[Table(name: "users")]
 public class User : IdentityUser
 {
     [JsonProperty(propertyName: "full_name")]
@@ -18,7 +21,7 @@ public class User : IdentityUser
     public bool Active { get; set; }
 
     [JsonProperty(propertyName: "user_role")]
-    public UserRole UserRole { get; set; }
+    public RoleType RoleType { get; set; }
 
     [JsonIgnore]
     public virtual IList<CourseStudent> CourseStudents { get; set; }

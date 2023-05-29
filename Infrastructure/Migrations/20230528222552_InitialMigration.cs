@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -35,6 +35,7 @@ namespace Infrastructure.Migrations
                     CountryId = table.Column<string>(type: "text", nullable: false),
                     Photo = table.Column<string>(type: "text", nullable: false),
                     Active = table.Column<bool>(type: "boolean", nullable: false),
+                    RoleType = table.Column<int>(type: "integer", nullable: false),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -53,6 +54,23 @@ namespace Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "semester",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    semester_name = table.Column<string>(type: "text", nullable: false),
+                    semester_beginning_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    semester_end_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    last_updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    deleted = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_semester", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -161,6 +179,65 @@ namespace Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "course",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    lecturer_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    LecturerId1 = table.Column<string>(type: "text", nullable: false),
+                    semester_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    course_name = table.Column<string>(type: "text", nullable: false),
+                    course_code = table.Column<string>(type: "text", nullable: false),
+                    created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    last_updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    deleted = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_course", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_course_AspNetUsers_LecturerId1",
+                        column: x => x.LecturerId1,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_course_semester_semester_id",
+                        column: x => x.semester_id,
+                        principalTable: "semester",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "course_student",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    student_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    StudentId1 = table.Column<string>(type: "text", nullable: true),
+                    course_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    last_updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    deleted = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_course_student", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_course_student_AspNetUsers_StudentId1",
+                        column: x => x.StudentId1,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_course_student_course_course_id",
+                        column: x => x.course_id,
+                        principalTable: "course",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -197,6 +274,26 @@ namespace Infrastructure.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_course_LecturerId1",
+                table: "course",
+                column: "LecturerId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_course_semester_id",
+                table: "course",
+                column: "semester_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_course_student_course_id",
+                table: "course_student",
+                column: "course_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_course_student_StudentId1",
+                table: "course_student",
+                column: "StudentId1");
         }
 
         /// <inheritdoc />
@@ -218,10 +315,19 @@ namespace Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "course_student");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "course");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "semester");
         }
     }
 }

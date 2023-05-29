@@ -4,11 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Infrastructure.Model;
 
+[Table(name: "course_student")]
 public class CourseStudent : BaseModel
 {
     [Required]
     [Column(name: "student_id")]
-    public Guid StudentId { get; set; }
+    public string StudentId { get; set; }
     public virtual User Student { get; set; }
 
     [Required]

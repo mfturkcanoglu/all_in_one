@@ -1,9 +1,22 @@
-﻿namespace Infrastructure.Model.Base;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Infrastructure.Model.Base;
 
 public class BaseModel
 {
+    [Column(name: "id")]
+    [Required]
     public Guid Id { get; set; }
-    public DateTime Created { get; set; } = DateTime.Now;
-    public DateTime LastUpdated { get; set; } = DateTime.Now;
+
+    [Column(name: "created")]
+    [Required]
+    public DateTime Created { get; set; }
+
+    [Column(name: "last_updated")]
+    [Required]
+    public DateTime LastUpdated { get; set; }
+
+    [Column(name: "deleted")]
     public DateTime? Deleted { get; set; }
 }

@@ -9,11 +9,6 @@ public class DataInstaller : IInstaller
 {
     public void InstallService(IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<UserDbContext>(options =>
-        {
-            options.UseNpgsql(configuration.GetConnectionString("Postgres"));
-        });
-
         services.AddDbContext<AppDbContext>(options =>
         {
             options.UseNpgsql(configuration.GetConnectionString("Postgres"));
@@ -25,7 +20,7 @@ public class DataInstaller : IInstaller
             options.Password.RequireNonAlphanumeric = false;
             options.Password.RequiredLength = 6;
         })
-        .AddEntityFrameworkStores<UserDbContext>()
+        .AddEntityFrameworkStores<AppDbContext>()
         .AddDefaultTokenProviders();
     }
 }
